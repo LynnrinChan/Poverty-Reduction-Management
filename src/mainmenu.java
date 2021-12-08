@@ -191,6 +191,13 @@ public class mainmenu {
             }
         });
 
+        project.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new projectmanager().init();
+            }
+        });
+
         if (TYPE.equals("管理员") || TYPE.equals("超级用户")) {
             functions.add(addpeople);
             functions.add(searchpeople);
