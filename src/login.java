@@ -154,7 +154,7 @@ public class login {
 
         // 设置用户名 icon
         try {
-            usernameicon = ImageIO.read(new File("username.jpeg"));
+            usernameicon = ImageIO.read(new File("username.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -162,7 +162,7 @@ public class login {
 
         // 设置密码 icon
         try {
-            passwordicon = ImageIO.read(new File("password.jpeg"));
+            passwordicon = ImageIO.read(new File("password.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

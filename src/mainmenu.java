@@ -1,11 +1,15 @@
 import javax.imageio.ImageIO;
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Vector;
 
 public class mainmenu {
     JFrame menu;
@@ -19,12 +23,77 @@ public class mainmenu {
     JMenuItem addpeople;
     JMenuItem modifypeople;
     JMenuItem removepeople;
+    JMenuItem project;
     MenuBar menubarmac;
     JLabel LOGO;
+    JTabbedPane selectcard;
 
     BufferedImage bannerlogo;
 
     String TYPE = null;
+
+    public JComponent listproject(){
+        String item = "*";
+        String SQLName = "project";
+        String TYPE = "all";
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        Vector rowData = table.getRows(item, SQLName, TYPE, null);
+        Vector columnNames = table.getHead(item, SQLName, TYPE, null);
+        DefaultTableModel dtm = new DefaultTableModel(rowData,columnNames) {
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        JTable table = new JTable(dtm);
+        JScrollPane move = new JScrollPane(table);
+        panel.add(move);
+
+        return panel;
+    }
+
+    public JComponent listuser(){
+        String item = "*";
+        String SQLName = "users";
+        String TYPE = "all";
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        Vector rowData = table.getRows(item, SQLName, TYPE, null);
+        Vector columnNames = table.getHead(item, SQLName, TYPE, null);
+        DefaultTableModel dtm = new DefaultTableModel(rowData,columnNames) {
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        JTable table = new JTable(dtm);
+        JScrollPane move = new JScrollPane(table);
+        panel.add(move);
+
+        return panel;
+    }
+
+    public JComponent listpeople(){
+        String item = "*";
+        String SQLName = "people";
+        String TYPE = "all";
+
+        JPanel panel = new JPanel();
+        panel.setLayout(new BorderLayout());
+        Vector rowData = table.getRows(item, SQLName, TYPE, null);
+        Vector columnNames = table.getHead(item, SQLName, TYPE, null);
+        DefaultTableModel dtm = new DefaultTableModel(rowData,columnNames) {
+            public boolean isCellEditable(int row, int column) {
+                return false;
+            }
+        };
+        JTable table = new JTable(dtm);
+        JScrollPane move = new JScrollPane(table);
+        panel.add(move);
+
+        return panel;
+    }
 
     public void menu(String username, int type){
         if (type==1)
@@ -45,7 +114,15 @@ public class mainmenu {
         addpeople = new JMenuItem("添加");
         modifypeople = new JMenuItem("修改");
         removepeople = new JMenuItem("删除");
+        project = new JMenuItem("帮扶项目管理");
         LOGO = new JLabel();
+        selectcard = new JTabbedPane(SwingConstants.TOP);
+
+        selectcard.addTab("扶贫人员表",listpeople());
+        selectcard.addTab("扶贫项目表",listproject());
+        selectcard.addTab("注册用户表",listuser());
+
+        selectcard.setSelectedIndex(0);
 
         // 设置 Logo
         try {
@@ -57,17 +134,13 @@ public class mainmenu {
 
         // JFrame 配置
         menu.setVisible(true);
-        menu.setSize(500,500);
+        menu.setSize(1000,1000);
         menu.setLocationRelativeTo(null);
-        menu.setResizable(false);
+        menu.setResizable(true);
         menu.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        menu.setMenuBar(menubarmac);
 
         menu.add(menubar, BorderLayout.NORTH);
-        menu.add(main, BorderLayout.CENTER);
-
-        // JPanel 配置
-        main.add(LOGO);
+        menu.add(selectcard, BorderLayout.CENTER);
 
         // 菜单栏配置 (窗口内)
         menubar.add(nowuser);
@@ -123,8 +196,11 @@ public class mainmenu {
             functions.add(searchpeople);
             functions.add(modifypeople);
             functions.add(removepeople);
+            functions.add(project);
         }
         if (TYPE.equals("普通用户")) {
+            addpeople.setText("报名扶贫项目");
+            functions.add(addpeople);
             functions.add(searchpeople);
         }
     }
