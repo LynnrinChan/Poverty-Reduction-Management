@@ -11,7 +11,7 @@
  Target Server Version : 80026
  File Encoding         : 65001
 
- Date: 05/12/2021 17:18:19
+ Date: 08/12/2021 09:14:46
 */
 
 SET NAMES utf8mb4;
@@ -48,6 +48,24 @@ INSERT INTO `people` VALUES ('5', '湖南长沙', '2', '正常', '未知', '因�
 INSERT INTO `people` VALUES ('6', '湖南株洲', '1', '正常', '未知', '因病致贫', '2021-12-05', '1', 'user6', '123456', '1', 'true');
 INSERT INTO `people` VALUES ('7', '湖南邵阳', '4', '正常', '未知', '因病致贫', '2021-12-05', '1', 'user7', '123456', '1', 'true');
 INSERT INTO `people` VALUES ('8', '湖南吉首', '5', '正常', '未知', '因病致贫', '2021-12-05', '1', 'user8', '123456', '1', 'true');
+COMMIT;
+
+-- ----------------------------
+-- Table structure for project
+-- ----------------------------
+DROP TABLE IF EXISTS `project`;
+CREATE TABLE `project` (
+  `projectid` varchar(255) DEFAULT NULL,
+  `projectname` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+-- ----------------------------
+-- Records of project
+-- ----------------------------
+BEGIN;
+INSERT INTO `project` VALUES ('1', '扶贫项目1');
+INSERT INTO `project` VALUES ('2', '扶贫项目2');
+INSERT INTO `project` VALUES ('3', '扶贫项目3');
 COMMIT;
 
 -- ----------------------------
